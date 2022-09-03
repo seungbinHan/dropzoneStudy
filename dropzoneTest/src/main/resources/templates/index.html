@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css"/>
+</head>
+<body>
+hi this is index.html
+<div>
+    <form action="/recieveDropzone"
+          class="dropzone"
+          id="my-awesome-dropzone">
+        <input type="text" name="title">
+    </form >
+    <input type="button" value="서브밋!" id="sendBtn">
+
+</div>
+</body>
+<script>
+    Dropzone.options.myAwesomeDropzone = {
+        autoProcessQueue: false
+        ,header:{
+            "My-Awesome-Header": "header value"
+        }
+        ,init:function (){
+            let myDropzone = this;
+            $("#sendBtn").on("click",function (){
+                myDropzone.processQueue();
+            });
+        }
+
+    }
+    let isBlank = (str) => {
+        return str === ''
+            || str === ' '
+            || str === null
+            || str === undefined;
+    }
+
+
+</script>
+</html>
+
+
+<!-- ajax 보관용
+$("#sendBtn").on("click",function (){
+$.ajax({
+url:"/recieveDropzone"
+,method:"post"
+,data: file
+,contentType:false
+,enctype:"multipart/formdata"
+,success:function(res){
+console.log(res)
+
+}
+,error:function(e){
+console.log(e)
+}
+})
+
+})
+-->
